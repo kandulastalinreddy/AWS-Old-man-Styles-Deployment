@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Old Man Styles — Dress Like You Mean It</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=Jost:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Notification bar -->
+<div class="notice-bar">
+  <div class="notice-track" id="noticeTrack">
+    <button class="notice-item active" onclick="filterCat('All'); toast('Free shipping unlocks above ₹2,999')">Free shipping across India on orders above ₹2,999</button>
+    <button class="notice-item" onclick="filterCat('Sale'); toast('Code REAL10 applied at checkout')">Use code REAL10 for 10% off your first order</button>
+    <button class="notice-item" onclick="goTo('contact'); toast('COD available at checkout — pan India')">Cash on delivery available pan India</button>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="nav-wrap">
+    <button class="logo" onclick="goTo('top')">OLD MAN STYLES</button>
+    <nav class="primary-nav">
+      <button onclick="filterCat('All')" class="active">Shop</button>
+      <button onclick="filterCat('Casual')">Casual</button>
+      <button onclick="filterCat('Formal')">Formal</button>
+      <button onclick="filterCat('Ethnic')">Ethnic</button>
+      <button onclick="goTo('about')">About</button>
+      <button onclick="goTo('contact')">Contact</button>
+      <button onclick="filterCat('Sale')" style="color:var(--gold-light);">Sale</button>
+    </nav>
+    <div class="nav-icons">
+      <button class="icon-btn" aria-label="Search" onclick="openSearch()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="icon-btn hamburger" aria-label="Menu" onclick="toast('Menu — use links above on desktop')">☰</button>
+      <button class="icon-btn" aria-label="Open cart" onclick="openCart()">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="container hero-content">
+    <span class="eyebrow">New Collection 2026</span>
+    <h1>Dress Like<br>You Mean <em>It</em></h1>
+    <p>Premium menswear for every occasion. Crafted for the man who commands respect — no half measures, no shortcuts.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-gold" onclick="filterCat('All')">Shop Now →</button>
+      <button class="btn btn-outline" onclick="goTo('about')">Our Story</button>
+    </div>
+  </div>
+</section>
+
+<!-- Category tiles -->
+<section class="categories container">
+  <div class="tape-divider"><span class="tick">Est. Heritage</span><div class="line"></div><span class="tick">Tailored In India</span><div class="line"></div><span class="tick">Since 1974</span></div>
+  <div class="cat-grid">
+    <button class="cat-tile" onclick="filterCat('Ethnic')">
+      <img src="Ethnicwear.jpg" alt="Ethnic and festive wear">
+      <div class="cat-tile-text"><span class="eyebrow">Celebrate In Style</span><h3>Ethnic &amp; Festive</h3></div>
+    </button>
+    <button class="cat-tile" onclick="filterCat('Accessories')">
+      <img src="accessories.jpg" alt="Accessories">
+      <div class="cat-tile-text"><span class="eyebrow">Finish The Look</span><h3>Accessories</h3></div>
+    </button>
+    <button class="cat-tile" onclick="filterCat('Formal')">
+      <img src="formals.jpg" alt="Formal wear">
+      <div class="cat-tile-text"><span class="eyebrow">Sharp. Polished. Unstoppable.</span><h3>Formal Wear</h3></div>
+    </button>
+  </div>
+</section>
+
+<!-- Shop / Bestsellers -->
+<section class="shop-section container" id="shop">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">Top Picks</span>
+      <h2>Bestsellers</h2>
+    </div>
+    <span style="color:var(--text-dim);font-size:0.9rem;">What real men are wearing right now</span>
+  </div>
+
+  <div class="filter-tabs" id="filterTabs">
+    <button class="filter-tab active" onclick="filterCat('All', this)">All</button>
+    <button class="filter-tab" onclick="filterCat('Casual', this)">Casual</button>
+    <button class="filter-tab" onclick="filterCat('Formal', this)">Formal</button>
+    <button class="filter-tab" onclick="filterCat('Ethnic', this)">Ethnic</button>
+    <button class="filter-tab" onclick="filterCat('Accessories', this)">Accessories</button>
+    <button class="filter-tab" onclick="filterCat('Sale', this)">Sale</button>
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<!-- Values strip -->
+<section class="values-strip">
+  <div class="container values-grid">
+    <div class="value-item"><span class="eyebrow">🚚</span><h4>Free Shipping</h4><p>On orders above ₹2,999</p></div>
+    <div class="value-item"><span class="eyebrow">↩️</span><h4>7-Day Returns</h4><p>No questions asked</p></div>
+    <div class="value-item"><span class="eyebrow">🔒</span><h4>Secure Payments</h4><p>UPI, Cards &amp; COD</p></div>
+    <div class="value-item"><span class="eyebrow">✓</span><h4>Quality Assured</h4><p>Built to outlast trends</p></div>
+  </div>
+</section>
+
+<!-- Brand statement -->
+<section class="brand-statement container" id="about">
+  <span class="eyebrow">Our Story</span>
+  <h2 style="margin-top:14px;">We don't chase trends. We build <span>wardrobes that last</span> — for men who'd rather be respected than followed.</h2>
+  <p>Old Man Styles was built on one idea: real style doesn't shout, it shows up prepared. Every stitch is made for the man who dresses for himself first — sharp at work, easy on weekends, unmistakable at every function.</p>
+</section>
+
+<!-- Newsletter -->
+<div class="tape-divider" style="max-width:1320px;margin:0 auto;padding:0 32px 30px;"><div class="line"></div><span class="tick">Join The List</span><div class="line"></div></div>
+<div class="newsletter" id="contact">
+  <div>
+    <h3>Get first access. No fluff.</h3>
+    <p>New drops, real discounts, zero spam — straight to your inbox.</p>
+  </div>
+  <form class="newsletter-form" onsubmit="event.preventDefault(); toast('You\'re on the list.'); this.reset();">
+    <input type="email" required placeholder="Enter your email">
+    <button type="submit">Subscribe</button>
+  </form>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <span class="footer-logo">OLD MAN STYLES</span>
+      <p>Premium menswear for every occasion. Crafted for the man who commands respect.</p>
+      <div class="social-row">
+        <button aria-label="Instagram" onclick="toast('Follow us on Instagram @oldmanstyles')">IG</button>
+        <button aria-label="Facebook" onclick="toast('Find us on Facebook')">FB</button>
+        <button aria-label="X" onclick="toast('Follow us on X')">X</button>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Shop</h5>
+      <ul>
+        <li><button onclick="filterCat('Casual')">Casual</button></li>
+        <li><button onclick="filterCat('Formal')">Formal</button></li>
+        <li><button onclick="filterCat('Ethnic')">Ethnic</button></li>
+        <li><button onclick="filterCat('Accessories')">Accessories</button></li>
+        <li><button onclick="filterCat('Sale')">Sale</button></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Help</h5>
+      <ul>
+        <li><button onclick="toast('Shipping is free above ₹2,999')">Shipping</button></li>
+        <li><button onclick="toast('7-day hassle-free returns')">Returns</button></li>
+        <li><button onclick="toast('Size chart coming soon')">Size Guide</button></li>
+        <li><button onclick="toast('support@oldmanstyles.in')">Contact Us</button></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><button onclick="goTo('about')">About</button></li>
+        <li><button onclick="toast('We are hiring — write to us')">Careers</button></li>
+        <li><button onclick="toast('Terms coming soon')">Terms</button></li>
+        <li><button onclick="toast('Privacy policy coming soon')">Privacy</button></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>We Accept</h5>
+      <div class="payment-icons">
+        <span>UPI</span><span>Visa</span><span>Mastercard</span><span>RuPay</span><span>COD</span>
+      </div>
+      <p style="margin-top:16px;">Bengaluru, Karnataka, India</p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Old Man Styles. All rights reserved.</span>
+    <div><button onclick="toast('Terms coming soon')">Terms</button><button onclick="toast('Privacy policy coming soon')">Privacy</button><button onclick="toast('Sitemap coming soon')">Sitemap</button></div>
+  </div>
+</footer>
+
+<!-- Cart overlay + drawer -->
+<div class="overlay" id="overlay" onclick="closeAllPanels()"></div>
+
+<div class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Shopping cart">
+  <div class="cart-header">
+    <h3>Your Bag</h3>
+    <button class="close-btn" onclick="closeAllPanels()" aria-label="Close cart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter">
+    <div class="cart-subtotal-row"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+    <button class="btn btn-gold btn-full" onclick="openCheckout()">Checkout</button>
+    <p class="cart-note">Shipping &amp; taxes calculated at checkout</p>
+  </div>
+</div>
+
+<!-- Search bar -->
+<div class="search-bar" id="searchBar">
+  <div class="search-bar-inner">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <input id="searchInput" type="text" placeholder="Search by product name or category" autocomplete="off"
+      oninput="renderSearchResults(this.value)"
+      onkeydown="if(event.key==='Escape'){closeSearch();}">
+    <button class="search-close" onclick="closeSearch()" aria-label="Close search">✕</button>
+  </div>
+  <div class="search-results-panel" id="searchResults"></div>
+</div>
+
+<!-- Checkout modal -->
+<div class="modal" id="checkoutModal" role="dialog" aria-label="Checkout">
+  <div class="modal-box" id="checkoutBox"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
